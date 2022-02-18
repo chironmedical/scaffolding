@@ -6,7 +6,7 @@ build {
 
   provisioner "shell" {
     inline = [
-      "apk add --no-cache jq curl openssh-client sshfs",
+      "apk add --no-cache jq curl openssh-client sshfs iptables make",
       "curl -sSL https://pkgs.tailscale.com/stable/tailscale_${var.tailscale_version}_amd64.tgz -o tailscale_${var.tailscale_version}_amd64.tgz",
       "tar xzf tailscale_${var.tailscale_version}_amd64.tgz",
       "chmod +x tailscale_${var.tailscale_version}_amd64/tailscale tailscale_${var.tailscale_version}_amd64/tailscaled",
