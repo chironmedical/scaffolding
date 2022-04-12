@@ -7,12 +7,13 @@ build {
   provisioner "shell" {
     inline = [
       "apk add --no-cache jq curl openssh-client sshfs iptables make",
+      "curl -sSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared",
       "curl -sSL https://pkgs.tailscale.com/stable/tailscale_${var.tailscale_version}_amd64.tgz -o tailscale_${var.tailscale_version}_amd64.tgz",
       "tar xzf tailscale_${var.tailscale_version}_amd64.tgz",
       "chmod +x tailscale_${var.tailscale_version}_amd64/tailscale tailscale_${var.tailscale_version}_amd64/tailscaled",
       "mv tailscale_${var.tailscale_version}_amd64/tailscale tailscale_${var.tailscale_version}_amd64/tailscaled /usr/local/bin && rm -rf tailscale_${var.tailscale_version}_amd64 tailscale_${var.tailscale_version}_amd64.tgz",
       "curl -sSL https://github.com/flatcar-linux/container-linux-config-transpiler/releases/download/${var.ct_version}/ct-${var.ct_version}-x86_64-unknown-linux-gnu -o /usr/local/bin/ct",
-      "chmod +x /usr/local/bin/ct"
+      "chmod +x /usr/local/bin/ct /usr/local/bin/cloudflared"
     ]
   }
 
