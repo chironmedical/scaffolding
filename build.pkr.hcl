@@ -40,8 +40,9 @@ build {
   provisioner "shell" {
     inline = [
       "curl -sSL https://releases.hashicorp.com/packer/${var.packer_version}/packer_${var.packer_version}_linux_amd64.zip -o packer_${var.packer_version}_linux_amd64.zip",
-      "unzip packer_${var.packer_version}_linux_amd64.zip && chmod +x packer && mv packer /usr/local/bin/",
-      "rm -rf packer_${var.packer_version}_linux_amd64.zip"
+      "curl -sSL https://releases.hashicorp.com/terraform/${var.terraform_version}/terraform_${var.terraform_version}_linux_amd64.zip -o terraform_${var.terraform_version}_linux_amd64.zip",
+      "unzip packer_${var.packer_version}_linux_amd64.zip && unzip terraform_${var.terraform_version}_linux_amd64.zip && chmod +x packer terraform && mv packer terraform /usr/local/bin/",
+      "rm -rf packer_${var.packer_version}_linux_amd64.zip terraform_${var.terraform_version}_linux_amd64.zip"
     ]
   }
 
