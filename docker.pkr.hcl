@@ -1,5 +1,5 @@
 source "docker" "base" {
-  image          = "alpine"
+  image          = "google/cloud-sdk:alpine"
   commit         = true
   changes        = [
     "ENTRYPOINT [\"/bin/sh\", \"-c\"]",
