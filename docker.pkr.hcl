@@ -6,7 +6,7 @@ source "docker" "base" {
   ]
 }
 
-source "docker" "maintenance" {
+source "docker" "python" {
   image          = "python:3.7-alpine"
   commit         = true
   changes        = [

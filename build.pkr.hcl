@@ -32,8 +32,8 @@ build {
 }
 
 build {
-  source "docker.maintenance" {
-    name = "maintenance"
+  source "docker.python" {
+    name = "python"
 
   }
 
@@ -52,7 +52,7 @@ build {
   post-processors {
     post-processor "docker-tag" {
       repository = "${var.repository}"
-      tags       = ["maintenance"]
+      tags       = ["python"]
     }
 
     post-processor "docker-push" {
