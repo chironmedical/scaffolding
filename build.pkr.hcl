@@ -32,6 +32,39 @@ build {
 }
 
 build {
+  source "docker.maintenance" {
+    name = "maintenance"
+
+  }
+
+  provisioner "shell" {
+    inline = [
+      "apk add --no-cache jq curl openssl openssh-client sshfs iptables make git",
+      "curl -sSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared",
+      "curl -sSL https://pkgs.tailscale.com/stable/tailscale_${var.tailscale_version}_amd64.tgz -o tailscale_${var.tailscale_version}_amd64.tgz",
+      "tar xzf tailscale_${var.tailscale_version}_amd64.tgz",
+      "chmod +x tailscale_${var.tailscale_version}_amd64/tailscale tailscale_${var.tailscale_version}_amd64/tailscaled",
+      "mv tailscale_${var.tailscale_version}_amd64/tailscale tailscale_${var.tailscale_version}_amd64/tailscaled /usr/local/bin && rm -rf tailscale_${var.tailscale_version}_amd64 tailscale_${var.tailscale_version}_amd64.tgz",
+      "chmod +x /usr/local/bin/cloudflared"
+    ]
+  }
+
+  post-processors {
+    post-processor "docker-tag" {
+      repository = "${var.repository}"
+      tags       = ["maintenance"]
+    }
+
+    post-processor "docker-push" {
+      login          = true
+      login_server   = "${var.registry}"
+      login_username = "${var.username}"
+      login_password = "${var.password}"
+    }
+  }
+}
+
+build {
   source "docker.packer" {
     name = "packer"
   }
