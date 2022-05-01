@@ -7,7 +7,7 @@ source "docker" "base" {
 }
 
 source "docker" "maintenance" {
-  image          = "python:3.7-alpine"
+  image          = "python:3.7-slim"
   commit         = true
   changes        = [
     "ENTRYPOINT [\"/bin/sh\", \"-c\"]",
