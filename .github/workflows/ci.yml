@@ -40,5 +40,5 @@ jobs:
           packer build -color=false -on-error=abort -only 'docker.packer' .
           packer build -color=false -on-error=abort -only 'docker.terraform' .
           packer build -color=false -on-error=abort -only 'docker.provisioner' .
-          packer build -color=false -on-error=abort -only 'docker.maintenance' .
+          packer build -color=false -on-error=abort -only 'docker.python' .
       
