@@ -39,7 +39,9 @@ build {
 
   provisioner "shell" {
     inline = [
-      "apk add --no-cache jq curl openssl openssh-client sshfs iptables make git cmake",
+      "apt-get update",
+      "apt-get install -y jq curl openssl openssh-client sshfs iptables make git cmake",
+      "rm -rf /var/lib/apt/lists/*",
       "curl -sSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared",
       "curl -sSL https://pkgs.tailscale.com/stable/tailscale_${var.tailscale_version}_amd64.tgz -o tailscale_${var.tailscale_version}_amd64.tgz",
       "tar xzf tailscale_${var.tailscale_version}_amd64.tgz",
